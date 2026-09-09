@@ -1,0 +1,290 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Theme tokens extracted verbatim from infblox.com.br's compiled Tailwind
+ * output (computed via getComputedStyle(document.documentElement) against
+ * the live site). The source site is a fixed dark theme (no light mode), so
+ * these are the only values defined — no @media (prefers-color-scheme) swap.
+ */
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --primary: #ff7b00; /* hsl(29 100% 50%) on the source site */
+  --primary-foreground: #0a0a0a;
+  --secondary: #ffffff;
+  --secondary-foreground: #09090b;
+  --muted: rgba(255, 255, 255, 0.03);
+  --muted-foreground: #ababab;
+  --muted-solid: #101012;
+  --accent: rgba(255, 255, 255, 0.05);
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.05);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #ff7b00;
+  --card: #09090b;
+  --radius: 0.6rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-solid: var(--muted-solid);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --radius-cc: var(--radius);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ---- Product card (copied verbatim from infblox.com.br/styles/product-card.css,
+   with `hsl(var(--primary))`/`rgb(var(--muted-foreground))` swapped for the
+   plain hex custom properties defined above). ---- */
+.product-card-refined {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.008));
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  border-color: rgba(255, 255, 255, 0.13);
+  border-width: 1px;
+  border-radius: 15px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.product-card-refined:hover {
+  border-color: color-mix(in srgb, var(--primary) 70%, transparent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.product-card-refined > div:first-child {
+  border-bottom-color: rgba(255, 255, 255, 0.11);
+}
+
+.product-card-body {
+  gap: 0;
+  min-height: 10.2rem;
+}
+
+.product-card-name {
+  min-height: 2.45em;
+  margin-bottom: 0.55rem;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.22;
+  text-transform: uppercase;
+}
+
+.product-card-pricing {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 3.05rem;
+  margin-bottom: 0.65rem;
+}
+
+.product-card-offer-line {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  min-height: 1.25rem;
+  margin-bottom: 0.1rem;
+}
+
+.product-card-discount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.25rem;
+  padding: 0.08rem 0.42rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 32%, transparent);
+  border-radius: 999px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 13%, transparent);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.product-card-compare-at {
+  color: var(--muted-foreground);
+  font-size: 0.68rem;
+  line-height: 1;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.product-card-price {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.product-card-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 0.42rem;
+  width: 100%;
+  margin-top: 0 !important;
+}
+
+.product-card-cart,
+.product-card-buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.35rem;
+  border-radius: 7px;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.product-card-cart {
+  flex: 0 0 2.35rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 52%, transparent);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 7.5%, transparent);
+}
+
+.product-card-cart svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.product-card-buy {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 0.5rem;
+  color: #0a0a0a;
+  background: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.product-card-refined:hover .product-card-buy {
+  background: color-mix(in srgb, var(--primary) 86%, transparent);
+}
+
+.product-card-refined:active .product-card-cart,
+.product-card-refined:active .product-card-buy {
+  transform: scale(0.97);
+}
+
+@media (min-width: 640px) {
+  .product-card-body {
+    min-height: 10.75rem;
+  }
+  .product-card-name {
+    font-size: 0.9rem;
+  }
+  .product-card-price {
+    font-size: 1.28rem;
+  }
+  .product-card-discount,
+  .product-card-compare-at {
+    font-size: 0.72rem;
+  }
+  .product-card-cart,
+  .product-card-buy {
+    height: 2.5rem;
+  }
+  .product-card-cart {
+    flex-basis: 2.5rem;
+  }
+  .product-card-buy {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---- Shared button styles (from core.css) ---- */
+.btn-primary {
+  color: #0a0a0a;
+  display: flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius);
+  background-color: var(--primary);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--primary) 80%, transparent);
+}
+
+.btn-secondary {
+  display: flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius);
+  border-width: 1px;
+  background-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+/* ---- Scroll-reveal (IntersectionObserver-driven fade-up) ---- */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition-delay: var(--delay, 0s);
+}
+.reveal-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rounded-cc {
+  border-radius: var(--radius);
+}
